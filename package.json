@@ -9,11 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-aria/color": "^3.0.0-beta.14",
     "next": "12.2.5",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-aria": "^3.18.0",
+    "react-dom": "18.2.0",
+    "react-stately": "^3.16.0",
+    "tone": "^14.7.77"
   },
   "devDependencies": {
+    "@react-stately/color": "^3.1.0",
+    "@react-types/color": "^3.0.0-beta.11",
+    "@types/node": "^18.7.3",
+    "@types/react": "^18.0.17",
     "eslint": "8.22.0",
     "eslint-config-next": "12.2.5"
   }

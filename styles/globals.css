@@ -1,26 +1,35 @@
-html,
+:root {
+  --background: #dad6cd;
+  --player: #ab958a;
+  --text-color: #000000;
+  --text-color-secondary: #717171;
+}
+[data-theme="dark"] {
+  --background: #666d6d;
+  --player: #98847b;
+  --text-color: #ffffff;
+  --text-color-secondary: #bababa;
+}
+
 body {
-  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Archivo", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+  color: var(--text-color);
 }
 
-* {
-  box-sizing: border-box;
+.App {
+  text-align: center;
+  background: var(--background);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
-}
