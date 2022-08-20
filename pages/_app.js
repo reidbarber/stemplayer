@@ -8,7 +8,6 @@ import "../components/Player/Player.css";
 import "../components/SearchField/SearchField.css";
 import "../components/SettingsButton/SettingsButton.css";
 import "../components/Slider/Slider.css";
-import "../components/StemifySearch/StemifySearch.css";
 import "../components/Tabs/Tabs.css";
 import "../components/WelcomeModal/WelcomeModal.css";
 import { SSRProvider } from "react-aria";

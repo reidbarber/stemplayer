@@ -4,7 +4,7 @@ import Modal from "../Modal/Modal";
 import { useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
 import Image from "next/image";
-import playIcon from "../StemifySearch/playIcon.svg";
+import playIcon from "./playIcon.svg";
 
 export type Track = {
   id: string;

@@ -13,7 +13,6 @@ import SettingsModal from "../SettingsModal/SettingsModal";
 import WelcomeModal, { Track } from "../WelcomeModal/WelcomeModal";
 import { defaultBlue, defaultRed } from "../../utils/colors";
 import { Color } from "@react-types/color";
-import { StemifyTrack } from "../StemifySearch/StemifySearch";
 import { useSettings } from "../../pages";
 
 export type StemType = "vocals" | "bass" | "drums" | "other";
@@ -69,12 +68,10 @@ interface PlayerContextType {
   startIsolateStem: (stem: StemType) => void;
   endIsolateStem: (stem: StemType) => void;
   playSong: (track: Track) => void;
-  playCustomLinks: (track: StemTracks) => void;
   lights: LightsState;
   setLights: React.Dispatch<React.SetStateAction<LightsState>>;
   colors: [Color, Color];
   setColors: React.Dispatch<React.SetStateAction<[Color, Color]>>;
-  playStemifySong: (track: StemifyTrack) => void;
   startLoop: () => void;
   endLoop: () => void;
 }
@@ -89,10 +86,8 @@ export const PlayerContext = createContext<PlayerContextType>({
   startIsolateStem: () => {},
   endIsolateStem: () => {},
   playSong: () => {},
-  playCustomLinks: () => {},
   lights: defaultLights,
   setLights: () => {},
-  playStemifySong: () => {},
   colors: [defaultRed, defaultBlue],
   setColors: () => {},
   startLoop: () => {},
@@ -338,41 +333,6 @@ export default function Player(props: PlayerProps) {
   );
 
   /**
-   * Play song via custom links provided
-   */
-  let playCustomLinks = useCallback(
-    (track: StemTracks) => {
-      setupAudio({
-        stems: {
-          other: track.other,
-          vocals: track.vocals,
-          bass: track.bass,
-          drums: track.drums,
-        },
-      });
-    },
-    [setupAudio]
-  );
-
-  /**
-   * Play song via custom links provided
-   */
-  let playStemifySong = useCallback(
-    (track: StemifyTrack) => {
-      setupAudio({
-        stems: {
-          other: track.other,
-          vocals: track.vocals,
-          bass: track.bass,
-          drums: track.drums,
-        },
-        tempo: { tempo_bpm: track.bpm },
-      });
-    },
-    [setupAudio]
-  );
-
-  /**
    * Start loop from current position
    */
   let startLoop = useCallback(() => {
@@ -425,8 +385,6 @@ export default function Player(props: PlayerProps) {
     startIsolateStem,
     endIsolateStem,
     playSong,
-    playCustomLinks,
-    playStemifySong,
     lights,
     setLights,
     colors,
