@@ -1,0 +1,22 @@
+.button {
+  cursor: pointer;
+  padding: 10px;
+  background-color: #857158;
+  color: white;
+  display: inline-block;
+  margin: 10px;
+  border-radius: 10px;
+  text-transform: uppercase;
+}
+
+.button:hover {
+  background-color: #77654f;
+}
+
+.button.circle {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}

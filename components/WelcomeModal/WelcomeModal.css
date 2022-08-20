@@ -1,0 +1,47 @@
+.circle {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: -5px;
+  border: 1px solid white;
+}
+
+.circle-group {
+  display: inline-block;
+  padding: 0 5px;
+  vertical-align: middle;
+}
+
+.playButton {
+  text-align: left;
+}
+
+.secondary {
+  background: none;
+  color: black;
+}
+
+.customStem-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.back-button {
+  background: none;
+  color: black;
+  text-transform: uppercase;
+}
+
+.back-button:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#welcomeModal.modal-container {
+  height: 75vh;
+}
+
+#stemifyLinkModal.modal-container {
+  height: auto;
+}

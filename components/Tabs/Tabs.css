@@ -1,0 +1,12 @@
+.tabList {
+  display: flex;
+  border-bottom: 1px solid grey;
+}
+
+.tab {
+  padding: 10px;
+}
+
+.tabPanel {
+  padding: 10px;
+}

@@ -1,0 +1,9 @@
+.slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  touch-action: none;
+  box-shadow: rgba(0, 0, 0, 0.03) -6px -6px 22px 10px inset,
+    rgba(0, 0, 0, 0.02) -6px -6px 22px 10px inset;
+  border-radius: 72px;
+}

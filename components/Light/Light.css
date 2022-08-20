@@ -1,0 +1,7 @@
+.light {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transition: opacity 0.2s;
+}
