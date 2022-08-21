@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <SSRProvider>
       <Head>
-        <title>[BETA] VIRTUAL STEM PLAYERe</title>
+        <title>[BETA] VIRTUAL STEM PLAYER</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta
           name="description"

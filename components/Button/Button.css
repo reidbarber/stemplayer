@@ -20,3 +20,14 @@
   align-items: center;
   margin: 0;
 }
+
+.secondary {
+  background: none;
+  color: black;
+  display: flex;
+}
+
+.secondary:hover {
+  background: none;
+  background-color: #B5A99A;
+}

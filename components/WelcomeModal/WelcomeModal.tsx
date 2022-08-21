@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
 import Image from "next/image";
 import playIcon from "./playIcon.svg";
+import removeIcon from "./removeIcon.svg";
 
 export type Track = {
   id: string;
@@ -141,8 +142,9 @@ export default function WelcomeModal(props: any) {
             <Button
               variant="secondary"
               onPress={() => removeFavorite(track.id)}
+              UNSAFE_className="removeButton"
             >
-              x
+              <Image src={removeIcon} alt="Remove" height={15} width={15} />
             </Button>
           </li>
         ))}
