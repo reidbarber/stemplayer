@@ -10,6 +10,7 @@ import "../components/SettingsButton/SettingsButton.css";
 import "../components/Slider/Slider.css";
 import "../components/Tabs/Tabs.css";
 import "../components/WelcomeModal/WelcomeModal.css";
+import "../components/TextField/TextField.css";
 import { SSRProvider } from "react-aria";
 import Head from "next/head";
 

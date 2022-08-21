@@ -6,6 +6,8 @@ import Loader from "../Loader/Loader";
 import Image from "next/image";
 import playIcon from "./playIcon.svg";
 import removeIcon from "./removeIcon.svg";
+import TextField from "../TextField/TextField";
+import { defaultFavorites } from './defaultFavorites';
 
 export type Track = {
   id: string;
@@ -41,8 +43,13 @@ export default function WelcomeModal(props: any) {
 
   useEffect(() => {
     if (typeof window !== "undefined" && localStorage) {
-      let favoritesString = localStorage.getItem("favorites") || "[]";
-      setFavorites(JSON.parse(favoritesString));
+      let favoritesString = localStorage.getItem("favorites");
+      if(!favoritesString) {
+        setFavorites(defaultFavorites);
+      } else {
+        setFavorites(JSON.parse(favoritesString));
+
+      }
     }
   }, []);
 
@@ -149,12 +156,12 @@ export default function WelcomeModal(props: any) {
           </li>
         ))}
       </ol>
-      <p>or paste a youtube link</p>
-      <input
+      <div style={{marginBottom: 10}}>or</div>
+      <TextField
         placeholder="https://www.youtube.com/watch?v="
-        aria-label="Youtube link"
+        label="Paste a youtube link"
         id="link-field"
-        onChange={(e) => setYoutubeLink(e.target.value)}
+        onChange={setYoutubeLink}
         value={youtubeLink}
       />
       {isValidYoutubeLink && <Button onPress={() => fetchTrack()}>Play</Button>}
