@@ -69,8 +69,10 @@ export default function WelcomeModal(props: any) {
           track.youtube_id = youtube_id[1];
         }
 
-        onClose();
-        playSong(track);
+        if (track.status === "ready") {
+          onClose();
+          playSong(track);
+        }
 
         // Add new track to favorites
         if (typeof window !== "undefined" && localStorage) {
@@ -100,7 +102,6 @@ export default function WelcomeModal(props: any) {
       </div>
     );
   }
-  
 
   return (
     <>
@@ -110,26 +111,30 @@ export default function WelcomeModal(props: any) {
             <div className="track-artwork">
               <Image
                 src={`https://img.youtube.com/vi/${track.youtube_id}/hqdefault.jpg`}
-                alt={`Artwork for ${track.metadata?.title || 'album'}`}
+                alt={`Artwork for ${track.metadata?.title || "album"}`}
                 width={64}
                 height={36}
                 objectFit="cover"
               />
             </div>
             <div className="track-info">
-              <div className="track-title">{track.metadata?.title}</div>
+              <div className="track-title">{track.metadata?.title || 'Currently splitting...'}</div>
               <div className="track-artist-album">
-                <span className="track-artist">{track.metadata?.artist || 'artist'}</span>
+                <span className="track-artist">
+                  {track.metadata?.artist || "Come back soon"}
+                </span>
                 {track.metadata?.album && (
                   <>
                     <span> • </span>
-                    <span className="track-album">{track.metadata?.album || 'album'}</span>
+                    <span className="track-album">
+                      {track.metadata?.album || "album"}
+                    </span>
                   </>
                 )}
               </div>
             </div>
             <div className="play">
-              {track.status === "ready" ? (
+              {track.status === "ready" && (
                 <Button
                   aria-label={`Play ${track.metadata.title}`}
                   key={track.id}
@@ -142,11 +147,6 @@ export default function WelcomeModal(props: any) {
                 >
                   <Image src={playIcon} alt="Play" height={15} width={15} />
                 </Button>
-              ) : (
-                <>
-                  Coming <br />
-                  Soon
-                </>
               )}
             </div>
             <Button
