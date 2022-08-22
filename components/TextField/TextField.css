@@ -8,6 +8,9 @@
   border-width: 0 0 2px 0;
   border-style: solid;
   border-color: #857158;
+  padding: 4px;
+  /** Over 16px prevents zooming on iOS **/
+  font-size: 18px;
 }
 
 .textfield label {
