@@ -281,7 +281,7 @@ export default function Player(props: PlayerProps) {
    */
   let startIsolateStem = useCallback(
     (stem: StemType) => {
-      let nextIsolated: StemType[] = [...isolated, stem];
+      let nextIsolated = [...isolated, stem];
       setIsolated(nextIsolated);
 
       STEMS.forEach((s) => {
@@ -301,11 +301,8 @@ export default function Player(props: PlayerProps) {
    */
   let endIsolateStem = useCallback(
     (stem: StemType) => {
-      let nextIsolated: StemType[] = [];
-      setIsolated((prevIsolated) => {
-        nextIsolated = prevIsolated.filter((toRemove) => toRemove !== stem);
-        return nextIsolated;
-      });
+      let nextIsolated = isolated.filter((toRemove) => toRemove !== stem);
+      setIsolated(nextIsolated);
 
       // Restore volume for all stems, unless something is still isolated.
       // In that case, just mute stem who's isolation is being ended.
@@ -317,7 +314,7 @@ export default function Player(props: PlayerProps) {
         });
       }
     },
-    [setStemVolume]
+    [isolated, setStemVolume]
   );
 
   /**
