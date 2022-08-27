@@ -281,11 +281,8 @@ export default function Player(props: PlayerProps) {
    */
   let startIsolateStem = useCallback(
     (stem: StemType) => {
-      let nextIsolated: StemType[] = [];
-      setIsolated((prevIsolated) => {
-        nextIsolated = [...prevIsolated, stem];
-        return nextIsolated;
-      });
+      let nextIsolated: StemType[] = [...isolated, stem];
+      setIsolated(nextIsolated);
 
       STEMS.forEach((s) => {
         // Set 0 volume for all non-isolated stems
@@ -296,7 +293,7 @@ export default function Player(props: PlayerProps) {
         }
       });
     },
-    [setStemVolume]
+    [isolated, setStemVolume]
   );
 
   /**
