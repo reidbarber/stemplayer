@@ -9,6 +9,7 @@ const SettingsButton = forwardRef((props, ref) => {
   let { theme } = useSettings();
   return (
     <div
+      role="button"
       {...mergeProps(focusProps, props)}
       aria-label="Open Settings"
       ref={ref as RefObject<HTMLDivElement>}
