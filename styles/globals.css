@@ -2,7 +2,7 @@
   --background: #dad6cd;
   --player: #ab958a;
   --text-color: #000000;
-  --text-color-secondary: #717171;
+  --text-color-secondary: #5c5c5c;
 }
 [data-theme="dark"] {
   --background: #666d6d;
