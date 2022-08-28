@@ -8,7 +8,7 @@ import {
 import { useRef } from "react";
 
 export default function Modal(props: any) {
-  let { title, closeButtonProps, isDismissable, children } = props;
+  let { title, closeButtonProps, isDismissable, children, size = 'small' } = props;
 
   // Handle interacting outside the dialog and pressing
   // the Escape key to close the modal.
@@ -28,7 +28,7 @@ export default function Modal(props: any) {
       <FocusScope contain>
         <div
           style={{ outline: "none" }}
-          className="modal-container"
+          className={`modal-container modal-container--${size}`}
           {...overlayProps}
           {...dialogProps}
           {...modalProps}

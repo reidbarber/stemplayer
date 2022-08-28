@@ -25,6 +25,7 @@ export default function SettingsModal(props: any) {
       onClose={onClose}
       isDismissable
       closeButtonProps={closeButtonProps}
+      size="large"
     >
       <Tabs aria-label="History of Ancient Rome">
         <Item key="tracks" title="Tracks">

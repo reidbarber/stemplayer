@@ -24,6 +24,11 @@
   flex-direction: column;
 }
 
+.modal-container--large {
+  width: 85vw;
+  height: 75vw;
+}
+
 .close-button {
   position: absolute;
   font-size: 2em;
