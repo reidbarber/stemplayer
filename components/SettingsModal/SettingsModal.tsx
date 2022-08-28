@@ -29,9 +29,32 @@ export default function SettingsModal(props: any) {
     >
       <Tabs aria-label="History of Ancient Rome">
         <Item key="tracks" title="Tracks">
+          <div style={{maxWidth: 400, margin: 'auto'}}>
           <SelectTracks onClose={onClose} />
+          </div>
         </Item>
-        <Item key="settings" title="Settings">
+        <Item key="colors" title="Colors">
+          <div style={{display: 'flex', justifyContent: 'center'}}>
+            <div style={{margin: 10}}>
+              <div style={{ margin: 10 }}>Color 1 (Inside)</div>
+              <ColorWheel
+                value={colors[0].toString("hsl")}
+                onChange={onChangeColor1}
+                showPreview
+              />
+            </div>
+            <div style={{margin: 10}}>
+              <div style={{ margin: 10 }}>Color 2 (Outside)</div>
+              <ColorWheel
+                value={colors[1].toString("hsl")}
+                onChange={onChangeColor2}
+                showPreview
+              />
+            </div>
+          </div>
+        </Item>
+        <Item key="controls" title="Settings">
+          <div style={{display: 'flex', flexDirection: 'column', maxWidth: 300, margin: 'auto'}}>
           <Button onPress={() => window.location.reload()}>
             Restart Player
           </Button>
@@ -42,21 +65,10 @@ export default function SettingsModal(props: any) {
             {dynamicLights ? "Disable" : "Enable"} Dynamic Lights
           </Button>
           <p>Dynamic lights may cause audio performance issues.</p>
-          <div style={{ marginBottom: 30 }}>
-            <div style={{ margin: 10 }}>Color 1 (Inside)</div>
-            <ColorWheel
-              value={colors[0].toString("hsl")}
-              onChange={onChangeColor1}
-              showPreview
-            />
           </div>
-          <div>
-            <div style={{ margin: 10 }}>Color 2 (Outside)</div>
-            <ColorWheel
-              value={colors[1].toString("hsl")}
-              onChange={onChangeColor2}
-              showPreview
-            />
+        </Item>
+        <Item key="about" title="about">
+        <div>
             <p>More Coming Soon.</p>
             <p>Not affiliated with YEEZY Tech or Kano.</p>
             <p>Add to your home screen for an app-like experience.</p>
