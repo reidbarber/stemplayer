@@ -28,8 +28,7 @@ export type Track = {
   youtube_id: string;
 };
 
-const REGEX_VALID_YOUTUBE_LINK =
-  /http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/;
+const REGEX_VALID_YOUTUBE_LINK = /http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/;
 
 export default function WelcomeModal(props: any) {
   const { onClose } = props;
@@ -105,6 +104,15 @@ export default function WelcomeModal(props: any) {
 
   return (
     <>
+      <TextField
+        placeholder="https://www.youtube.com/watch?v="
+        label="Paste a youtube link"
+        id="link-field"
+        onChange={setYoutubeLink}
+        value={youtubeLink}
+      />
+      {isValidYoutubeLink && <Button onPress={() => fetchTrack()}>Play</Button>}
+      <p style={{ padding: 10 }}>or select a track</p>
       <ol className="track-list">
         {favorites.map((track) => (
           <li className="track-item" key={track.id}>
@@ -118,7 +126,9 @@ export default function WelcomeModal(props: any) {
               />
             </div>
             <div className="track-info">
-              <div className="track-title">{track.metadata?.title || 'Currently splitting...'}</div>
+              <div className="track-title">
+                {track.metadata?.title || "Currently splitting..."}
+              </div>
               <div className="track-artist-album">
                 <span className="track-artist">
                   {track.metadata?.artist || "Come back soon"}
@@ -159,15 +169,6 @@ export default function WelcomeModal(props: any) {
           </li>
         ))}
       </ol>
-      <div style={{ marginBottom: 10 }}>or</div>
-      <TextField
-        placeholder="https://www.youtube.com/watch?v="
-        label="Paste a youtube link"
-        id="link-field"
-        onChange={setYoutubeLink}
-        value={youtubeLink}
-      />
-      {isValidYoutubeLink && <Button onPress={() => fetchTrack()}>Play</Button>}
     </>
   );
 }

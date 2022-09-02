@@ -5,8 +5,8 @@ export default function WelcomeModal(props: any) {
   const { onClose } = props;
 
   return (
-    <Modal title="Select a Track" isOpen onClose={onClose}>
-     <SelectTracks onClose={onClose} />
+    <Modal title="Virtual Stem Player" isOpen onClose={onClose}>
+      <SelectTracks onClose={onClose} />
     </Modal>
   );
 }

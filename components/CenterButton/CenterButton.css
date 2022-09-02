@@ -1,4 +1,5 @@
 .centerButton {
   cursor: pointer;
   border-radius: 50%;
+  outline: none;
 }
