@@ -6,6 +6,7 @@ import "../components/Light/Light.css";
 import "../components/Modal/Modal.css";
 import "../components/Player/Player.css";
 import "../components/SearchField/SearchField.css";
+import "../components/SettingsModal/SettingsModal.css";
 import "../components/SettingsButton/SettingsButton.css";
 import "../components/Slider/Slider.css";
 import "../components/Tabs/Tabs.css";

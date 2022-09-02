@@ -12,8 +12,12 @@ export default function SettingsModal(props: any) {
   let { onClose, closeButtonProps } = props;
 
   let { colors, setColors } = usePlayer();
-  let { theme, toggleTheme, dynamicLights, toggleDynamicLights } =
-    useSettings();
+  let {
+    theme,
+    toggleTheme,
+    dynamicLights,
+    toggleDynamicLights,
+  } = useSettings();
 
   let onChangeColor1 = (val: Color) => setColors((prev) => [val, prev[1]]);
   let onChangeColor2 = (val: Color) => setColors((prev) => [prev[0], val]);
@@ -39,26 +43,6 @@ export default function SettingsModal(props: any) {
             <SelectTracks onClose={onClose} />
           </div>
         </Item>
-        <Item key="colors" title="Colors">
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <div style={{ margin: 10 }}>
-              <div style={{ margin: 10 }}>Color 1 (Inside)</div>
-              <ColorWheel
-                value={colors[0].toString("hsl")}
-                onChange={onChangeColor1}
-                showPreview
-              />
-            </div>
-            <div style={{ margin: 10 }}>
-              <div style={{ margin: 10 }}>Color 2 (Outside)</div>
-              <ColorWheel
-                value={colors[1].toString("hsl")}
-                onChange={onChangeColor2}
-                showPreview
-              />
-            </div>
-          </div>
-        </Item>
         <Item key="controls" title="Settings">
           <div
             style={{
@@ -79,6 +63,24 @@ export default function SettingsModal(props: any) {
             </Button>
             <Button onPress={() => clearTracks()}>Clear Tracks</Button>
             <p>Dynamic lights may cause audio performance issues.</p>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div style={{ margin: 10 }}>
+                <div style={{ margin: 10 }}>Color 1 (Inside)</div>
+                <ColorWheel
+                  value={colors[0].toString("hsl")}
+                  onChange={onChangeColor1}
+                  showPreview
+                />
+              </div>
+              <div style={{ margin: 10 }}>
+                <div style={{ margin: 10 }}>Color 2 (Outside)</div>
+                <ColorWheel
+                  value={colors[1].toString("hsl")}
+                  onChange={onChangeColor2}
+                  showPreview
+                />
+              </div>
+            </div>
           </div>
         </Item>
         <Item key="about" title="about">

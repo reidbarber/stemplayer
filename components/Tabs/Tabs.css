@@ -1,11 +1,13 @@
 .tabList {
   display: flex;
-  border-bottom: 1px solid grey;
   justify-content: center;
+  padding: 5px;
 }
 
 .tab {
   padding: 10px;
+  border-radius: 10px;
+  outline: none;
 }
 
 .tabPanel {

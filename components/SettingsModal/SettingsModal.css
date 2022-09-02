@@ -1,0 +1,5 @@
+.modal .tabList {
+  position: sticky;
+  top: 0;
+  background: var(--background);
+}

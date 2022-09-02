@@ -32,7 +32,8 @@ export function Tab({ item, state }: any) {
       ref={ref}
       className="tab"
       style={{
-        borderBottom: isSelected ? "3px solid #77654f" : undefined,
+        backgroundColor: isSelected ? "#77654f" : undefined,
+        color: isSelected ? "white" : undefined,
         opacity: isDisabled ? "0.5" : undefined,
       }}
     >
