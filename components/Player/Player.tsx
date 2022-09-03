@@ -68,7 +68,7 @@ interface PlayerContextType {
   setStemVolume: (stem: StemType, value: number) => void;
   startIsolateStem: (stem: StemType) => void;
   endIsolateStem: (stem: StemType) => void;
-  playSong: (track: Track) => void;
+  playTrack: (track: Track) => void;
   lights: LightsState;
   setLights: React.Dispatch<React.SetStateAction<LightsState>>;
   colors: [Color, Color];
@@ -86,7 +86,7 @@ export const PlayerContext = createContext<PlayerContextType>({
   setStemVolume: () => {},
   startIsolateStem: () => {},
   endIsolateStem: () => {},
-  playSong: () => {},
+  playTrack: () => {},
   lights: defaultLights,
   setLights: () => {},
   colors: [defaultRed, defaultBlue],
@@ -183,7 +183,7 @@ export default function Player(props: PlayerProps) {
   /**
    * Play song or change song currently being played
    */
-  const playSong = useCallback(
+  const playTrack = useCallback(
     async (track: Track) => {
       // Clear current player if one exists
       stemsRef.current?.dispose();
@@ -373,7 +373,7 @@ export default function Player(props: PlayerProps) {
     setStemVolume,
     startIsolateStem,
     endIsolateStem,
-    playSong,
+    playTrack,
     lights,
     setLights,
     colors,

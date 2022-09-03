@@ -17,7 +17,7 @@ export type Track = {
     bpm: number;
     duration: number;
   };
-  status: string;
+  status: "ready" | "pending";
   stems: StemTracks;
   stem_variants: {
     codec: string;
@@ -27,12 +27,13 @@ export type Track = {
   youtube_id: string;
 };
 
+const YOUTUBE_LINK_PREFIX = "https://www.youtube.com/watch?v=";
 const REGEX_VALID_YOUTUBE_LINK = /http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/;
 const REGEX_YOUTUBE_ID = /(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/;
 
 export default function WelcomeModal(props: any) {
   const { onClose } = props;
-  let { playSong } = usePlayer();
+  let { playTrack } = usePlayer();
   let [isLoading, setIsLoading] = useState(false);
   let [youtubeLink, setYoutubeLink] = useState("");
   let [favorites, setFavorites] = useState<Track[]>([]);
@@ -40,52 +41,82 @@ export default function WelcomeModal(props: any) {
   let isValidYoutubeLink =
     youtubeLink.length > 5 && youtubeLink.match(REGEX_VALID_YOUTUBE_LINK);
 
+  let checkForReadyTracks = () => {
+    let notReadyTracks = favorites.filter(
+      (track) => track.status === "pending"
+    );
+    notReadyTracks.forEach(async (track) => {
+      let updatedTrack = await fetchTrack(
+        `${YOUTUBE_LINK_PREFIX}${track.youtube_id}`
+      );
+      if (updatedTrack.status === "ready") {
+        updatedTrack.youtube_id = track.youtube_id;
+        addToFavorites(updatedTrack);
+      }
+    });
+  };
+
+  // If a track isn't ready status, recheck it
   useEffect(() => {
     if (typeof window !== "undefined" && localStorage) {
       let favoritesString = localStorage.getItem("favorites");
       if (!favoritesString) {
         setFavorites(defaultFavorites);
+        addToFavorites(...defaultFavorites);
       } else {
         setFavorites(JSON.parse(favoritesString));
+        checkForReadyTracks();
       }
     }
   }, []);
 
-  let fetchTrack = () => {
-    setIsLoading(true);
-    fetch("/api/tracks", {
+  let fetchTrack: (link: string) => Promise<Track> = async (link: string) => {
+    let track: Track;
+    await fetch("/api/tracks", {
       method: "POST",
-      body: JSON.stringify({ link: youtubeLink }),
+      body: JSON.stringify({ link }),
     } as any)
       .then((res) => res.json())
       .then((data) => {
         setIsLoading(false);
-        let track: Track = data.data;
+        track = data.data;
         let youtube_id = youtubeLink.match(REGEX_YOUTUBE_ID);
         if (youtube_id !== null) {
           track.youtube_id = youtube_id[1];
         }
-
-        if (track.status === "ready") {
-          onClose();
-          playSong(track);
-        }
-
-        // Add new track to favorites
-        if (typeof window !== "undefined" && localStorage) {
-          let favoritesString = localStorage.getItem("favorites") || "[]";
-          let newFavorites = [track, ...JSON.parse(favoritesString)] as Track[];
-          setFavorites(newFavorites);
-          localStorage.setItem("favorites", JSON.stringify(newFavorites));
-        }
       });
+    return track;
   };
 
-  let removeFavorite = (id) => {
+  let addToFavorites = (...tracks: Track[]) => {
+    if (typeof window !== "undefined" && localStorage) {
+      let newFavorites = JSON.parse(
+        localStorage.getItem("favorites") || "[]"
+      ) as Track[];
+      newFavorites = newFavorites.filter(
+        (favorite) => tracks.findIndex((track) => track.id === favorite.id) < 0
+      );
+      newFavorites = [...tracks, ...newFavorites];
+      setFavorites(newFavorites);
+      localStorage.setItem("favorites", JSON.stringify(newFavorites));
+    }
+  };
+
+  let playYoutubeLink = async () => {
+    setIsLoading(true);
+    let track = await fetchTrack(youtubeLink);
+    if (track.status === "ready") {
+      playTrack(track);
+      onClose();
+    }
+    addToFavorites(track);
+  };
+
+  let removeTrackFromFavorites = (track: Track) => {
     if (typeof window !== "undefined" && localStorage) {
       let favoritesString = localStorage.getItem("favorites") || "[]";
       let newFavorites = (JSON.parse(favoritesString) as Track[]).filter(
-        (fav) => fav.id !== id
+        (favorite) => favorite.id !== track.id
       );
       setFavorites(newFavorites);
       localStorage.setItem("favorites", JSON.stringify(newFavorites));
@@ -109,8 +140,10 @@ export default function WelcomeModal(props: any) {
         onChange={setYoutubeLink}
         value={youtubeLink}
       />
-      {isValidYoutubeLink && <Button onPress={() => fetchTrack()}>Play</Button>}
-      <p style={{ padding: 10 }}>or select a track</p>
+      {isValidYoutubeLink && (
+        <Button onPress={() => playYoutubeLink()}>Play</Button>
+      )}
+      {favorites.length > 0 && <p style={{ padding: 10 }}>or select a track</p>}
       <ol className="track-list">
         {favorites.map((track) => (
           <li className="track-item" key={track.id}>
@@ -147,7 +180,7 @@ export default function WelcomeModal(props: any) {
                   aria-label={`Play ${track.metadata.title}`}
                   key={track.id}
                   onPress={() => {
-                    playSong(track);
+                    playTrack(track);
                     onClose();
                   }}
                   UNSAFE_className="playButton"
@@ -159,7 +192,7 @@ export default function WelcomeModal(props: any) {
             </div>
             <Button
               variant="secondary"
-              onPress={() => removeFavorite(track.id)}
+              onPress={() => removeTrackFromFavorites(track)}
               UNSAFE_className="removeButton"
             >
               <Image src={removeIcon} alt="Remove" height={15} width={15} />
