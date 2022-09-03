@@ -29,6 +29,7 @@ export type Track = {
 };
 
 const REGEX_VALID_YOUTUBE_LINK = /http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/;
+const REGEX_YOUTUBE_ID = /(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/;
 
 export default function WelcomeModal(props: any) {
   const { onClose } = props;
@@ -61,9 +62,7 @@ export default function WelcomeModal(props: any) {
       .then((data) => {
         setIsLoading(false);
         let track: Track = data.data;
-        let youtube_id = youtubeLink.match(
-          /(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/
-        );
+        let youtube_id = youtubeLink.match(REGEX_YOUTUBE_ID);
         if (youtube_id !== null) {
           track.youtube_id = youtube_id[1];
         }
