@@ -19,6 +19,7 @@
 
 .removeButton {
   margin: 0 0 0 5px;
+  min-width: 15px;
 }
 
 .customStem-group {
@@ -75,9 +76,8 @@
   max-width: 400px;
 }
 
-.track-artwork > img {
-  height: 60px;
-  width: 60px;
+.track-artwork {
+  min-width: 64px;
 }
 
 .play {
@@ -110,4 +110,3 @@
   justify-content: center;
   flex-direction: column;
 }
-
