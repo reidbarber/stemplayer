@@ -32,6 +32,8 @@ function MyApp({ Component, pageProps }) {
           property="og:description"
           content="Inspired by the Yeezy x Kano Stem Player."
         />
+        <meta property="og:image" content="./ogimage.png" />
+        <meta name="twitter:image" content="./ogimage.png" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:domain" value="https://stemplayer.io" />
         <meta
@@ -39,7 +41,7 @@ function MyApp({ Component, pageProps }) {
           value="Inspired by the Yeezy x Kano Stem Player."
         />
         <meta name="twitter:url" value="https://stemplayer.io" />
-        <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo_alt512.png" />
+        <link rel="apple-touch-icon" href="./logo_alt512.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
