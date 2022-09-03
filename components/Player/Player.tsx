@@ -180,7 +180,10 @@ export default function Player(props: PlayerProps) {
     meters.vocals,
   ]);
 
-  const setupAudio = useCallback(
+  /**
+   * Play song or change song currently being played
+   */
+  const playSong = useCallback(
     async (track: Track) => {
       // Clear current player if one exists
       stemsRef.current?.dispose();
@@ -318,16 +321,6 @@ export default function Player(props: PlayerProps) {
   );
 
   /**
-   * Play song or change song currently being played
-   */
-  let playSong = useCallback(
-    (track: Track) => {
-      setupAudio(track);
-    },
-    [setupAudio]
-  );
-
-  /**
    * Start loop from current position
    */
   let startLoop = useCallback(() => {
@@ -340,8 +333,9 @@ export default function Player(props: PlayerProps) {
     STEMS.forEach((stem) => {
       if (stemsRef.current) {
         Transport.setLoopPoints(startTime, endTime).loop = true;
-        stemsRef.current.player(stem).setLoopPoints(startTime, endTime).loop =
-          true;
+        stemsRef.current
+          .player(stem)
+          .setLoopPoints(startTime, endTime).loop = true;
       }
     });
   }, []);
