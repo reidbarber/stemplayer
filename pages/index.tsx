@@ -1,6 +1,6 @@
 import { useButton, OverlayProvider, usePreventScroll } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
-import { createContext, useContext, useRef, useState, useEffect } from "react";
+import { createContext, useContext, useRef, useState } from "react";
 import Player from "../components/Player/Player";
 import SettingsButton from "../components/SettingsButton/SettingsButton";
 

@@ -1,6 +1,5 @@
 import { StemTracks, usePlayer } from "../Player/Player";
 import Button from "../Button/Button";
-import Modal from "../Modal/Modal";
 import { useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
 import Image from "next/image";
