@@ -154,6 +154,7 @@ export default function WelcomeModal(props: any) {
                 width={64}
                 height={36}
                 objectFit="cover"
+                unoptimized
               />
             </div>
             <div className="track-info">
@@ -186,7 +187,13 @@ export default function WelcomeModal(props: any) {
                   UNSAFE_className="playButton"
                   variant="circle"
                 >
-                  <Image src={playIcon} alt="Play" height={15} width={15} />
+                  <Image
+                    src={playIcon}
+                    alt="Play"
+                    height={15}
+                    width={15}
+                    unoptimized
+                  />
                 </Button>
               )}
             </div>
@@ -195,7 +202,13 @@ export default function WelcomeModal(props: any) {
               onPress={() => removeTrackFromFavorites(track)}
               UNSAFE_className="removeButton"
             >
-              <Image src={removeIcon} alt="Remove" height={15} width={15} />
+              <Image
+                src={removeIcon}
+                alt="Remove"
+                height={15}
+                width={15}
+                unoptimized
+              />
             </Button>
           </li>
         ))}
